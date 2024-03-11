@@ -1,10 +1,19 @@
-# Node-todo-cicd
+# node-todo-cicd
 
-# 2-Tier application Deployment on AWS using docker and  kubernetes
+Run these commands:
 
-This node js web app
 
-## 1 create Dockerfile
+`sudo apt install nodejs`
 
-## 1 create jenkins CI/CD pipeline 
+
+`sudo apt install npm`
+
+
+`npm install`
+
+`node app.js`
+
+or Run by docker compose
+
+test
 
