@@ -1,0 +1,7 @@
+version: '1.0'
+
+services:
+  web:
+    image: "sohailshaikh23/todo-list"
+    ports:
+      - "8000:8000"
