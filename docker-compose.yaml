@@ -1,7 +1,7 @@
-version: '1.0'
+version: '3.3'
 
 services:
-  web:
-    image: "sohailshaikh23/todo-list"
+  node-todo:
+    image: "sohailshaikh23/node-todo"
     ports:
       - "8000:8000"
