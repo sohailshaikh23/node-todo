@@ -2,6 +2,6 @@ version: '3.3'
 
 services:
   node-todo:
-    image: "sohailshaikh23/node-todo:v2.0"
+    image: "sohailshaikh23/node-todo:latest"
     ports:
       - "8000:8000"
