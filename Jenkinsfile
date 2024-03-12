@@ -21,10 +21,10 @@ pipeline {
      
         stage("push"){
             steps{
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker tag node-todo:${image_version} ${env.dockerHubUser}/node-todo:${image_version}"
-                sh "docker push ${env.dockerHubUser}/node-todo:${image_version}"
+                withCredentials([usernamePassword(credentialsId: 'dockerhubid', passwordVariable: 'password', usernameVariable: 'username')]){
+                sh "docker login -u ${env.username} -p ${env.password}"
+                sh "docker tag node-todo:${image_version} ${env.username}/node-todo:${image_version}"
+                sh "docker push ${env.username}/node-todo:${image_version}"
                 echo 'image push successfull'
                 }
             	}
