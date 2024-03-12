@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-    	image_version="v1.0" }
+    	image_version="v2.0" }
    
 	stages {
 
