@@ -45,11 +45,14 @@ pipeline {
 
     post{
     	success{ 
+		echo 'successfully deployed'
 	       }
 
 	failure{
+		echo 'failed to deploy'
 	       }
 	always{
+		echo 'pipeline execution completed'
 	      }
 
 	}//post ends
