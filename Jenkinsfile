@@ -1,20 +1,21 @@
 pipeline {
     agent any
     
-    parameters {
-    	strint(name: "image_version", defaultValue: "latest",description: " docker image")       }
-    stages {
+    environment {
+    	tag="v1.0" }
+   
+	stages {
         
         stage("code"){
             steps{
                 git url: "https://github.com/", branch: "main"
-                echo 'code clone '
+                echo 'code clone successfull '
         	 }
          	     }
         stage("build and test"){
             steps{
                 sh "docker build -t node-todo ."
-                echo 'code build done'
+                echo 'code build successfull'
                  }
               		       }  
      
@@ -24,25 +25,26 @@ pipeline {
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                 sh "docker tag node-todo:${image_version} ${env.dockerHubUser}/node-todo:${image_version}"
                 sh "docker push ${env.dockerHubUser}/node-todo:${image_version}"
-                echo 'image push'
+                echo 'image push successfull'
                 }
             	}
           	     }	
+
+	    
         stage("deploy"){
             input {
 	          message "should i deploy ??"
-		  ok "yes, Proceed with deployment"
-		  }
+		  ok "yes, Proceed with deployment" }
 	    steps{
                 sh "docker-compose down && docker-compose up -d"
-                echo 'deployment done'
+                echo 'deployment done successfully'
                  }
-         	       }
-    }i
+         	}
+    }//stages end
 
 
     post{
-    	success{
+    	success{ 
 	       }
 
 	failure{
@@ -50,6 +52,7 @@ pipeline {
 	always{
 	      }
 
+	}//post ends
 
-	}
-}
+	
+}//pipeline ends
