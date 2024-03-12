@@ -5,7 +5,12 @@ pipeline {
     	image_version="latest" }
    
 	stages {
-        
+
+	stage("cleaning workspace"){
+		steps{
+			cleanws()
+		}
+	     }        
         stage("code"){
             steps{
                 git url: "https://github.com/", branch: "main"
