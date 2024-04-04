@@ -9,14 +9,14 @@ pipeline {
 	       
         stage("code"){
             steps{
-                git url: "https://github.com/sohailshaikh23/node-todo.git", branch: "main"
-                echo 'code clone successfull '
+                git url: "https://github.com", branch: "main"
+                echo 'Successfuly fetch the code for central repo '
         	 }
          	     }
         stage("build and test"){
             steps{
                 sh "docker build -t node-todo ."
-                echo 'code build successfull'
+                echo 'Successfull build docker image from the dockerfile'
                  }
               		       }  
      
@@ -24,29 +24,37 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockerhubid', passwordVariable: 'password', usernameVariable: 'username')]){
                 sh "docker login -u ${env.username} -p ${env.password}"
-                sh "docker tag node-todo ${env.username}/node-todo:${image_version}"
-                sh "docker push ${env.username}/node-todo:${image_version}"
-                echo 'image push successfull'
+                sh "docker tag node-todo ${env.username}/node-todo:latest"
+                sh "docker push ${env.username}/node-todo:latest"
+                echo 'Successfully pushed the image to dockerHub'
                 }
             	}
           	     }	
 
 	    
-        stage("deploy"){
-            input {
-	          message "should i deploy ??"
-		  ok "yes, Proceed with deployment" }
+        stage("deploying with docker compose"){
 	    steps{
                 sh "docker-compose down && docker-compose up -d"
-                echo 'deployment done successfully'
+                echo 'Successfully deployed with docker-compose'
+              }
+         	  }
+        
+		stage("deploying on EKS cluster"){
+            input {
+	          message "should i deploy on cluster??"
+		      ok "yes, Proceed with deployment" }
+	        steps{
+                sh "kubectl apply -f deployment.yml -f service.yml"
+                echo 'Successfully deploy on EKS cluster'
                  }
-         	}
-    }//stages end
+         	}    
+	
+	} //All stages end here
 
 
     post{
     	success{ 
-		echo 'successfully deployed'
+		echo 'successfully docntainerize and deployed the application'
 	       }
 
 	failure{
@@ -56,7 +64,7 @@ pipeline {
 		echo 'pipeline execution completed'
 	      }
 
-	}//post ends
+	}//post build actions ends
 
 	
-}//pipeline ends
+}//pipeline execution ends

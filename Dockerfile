@@ -1,7 +1,9 @@
 FROM node:12.2.0-alpine
-MAINTAINER "sohailshaikh125@gmail.com"
-WORKDIR app
+LABEL creator= "the owner of the dockerfile"
+MAINTAINER "dummymail@gmail.com"
+WORKDIR /todo_app
 COPY . .
 RUN npm install
 EXPOSE 8000
-CMD ["node","app.js"]
+ENTRYPOINT ["node"]
+CMD ["app.js"]

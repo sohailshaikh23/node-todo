@@ -1,0 +1,14 @@
+#this is a load balancer type of Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-todo-service
+  labels: node-todo
+  namespace: node-todo
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-todo
+   ports:
+    - port: 80
+      targetPort: 8000

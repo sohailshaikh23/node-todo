@@ -1,0 +1,29 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-todo
+  namespace: node-todo
+  labels:
+    app: node-todo
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: node-todo
+  template:
+    metadata:
+      name: node-todo
+      namespace: node-todo
+      labels:
+        app: node-todo
+    spec:
+      containers:
+        - name: node-todo
+          image: image:latest
+          ports:
+            - containerPort: 8000

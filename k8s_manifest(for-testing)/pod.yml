@@ -1,0 +1,15 @@
+# This is pod for todo webapp
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-todo
+  namespace: node-todo
+  labels:
+    app: node-todo
+
+spec:
+  containers:
+    - name: todolist-container
+      image: image
+      ports:
+        - containerPort: 8000
