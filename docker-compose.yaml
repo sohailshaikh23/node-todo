@@ -2,7 +2,7 @@ version: '3.3'
 services:
   node-todo:
     container_name: node-todo-list
-    image: "sohailshaikh23/node-todo:latest"
+    image: "image:latest"
     ports:
       - "8000:8000"
     networks:
