@@ -8,5 +8,5 @@ services:
     networks:
       - webapp:
 
-network:
+networks:
   webapp:
